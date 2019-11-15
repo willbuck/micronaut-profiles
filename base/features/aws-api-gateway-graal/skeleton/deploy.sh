@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 docker build . -t @app.name@
 mkdir -p build
 docker run --rm --entrypoint cat @app.name@  /home/application/function.zip > build/function.zip
 
 # check for role
-ROLE_NAME=lambda-basic-role
+ROLE_NAME=lambda-basic-execute
 ROLE_ARN=`aws iam get-role --role-name ${ROLE_NAME} | grep Arn | cut -d'"' -f4`
 if [ "${ROLE_ARN}" == "" ]; then
     echo "No role ${ROLE_NAME} exists!"
